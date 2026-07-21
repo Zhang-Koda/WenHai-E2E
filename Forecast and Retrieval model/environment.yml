@@ -1,0 +1,27 @@
+name: wenhai-e2e
+
+# conda env create -f environment.yml
+# conda activate wenhai-e2e
+
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - python=3.10
+  - numpy=1.26
+  - xarray=2024.2
+  - netcdf4=1.6
+  - metpy=1.6
+  - aerobulk-python=0.4
+  - pip
+  - pip:
+      - onnxruntime-gpu==1.23.2
+      # onnxruntime-gpu does not bundle the CUDA runtime; inference.py loads
+      # these at start-up, so LD_LIBRARY_PATH does not have to be set.
+      # Drop this block and use onnxruntime==1.23.2 for a CPU-only install.
+      - nvidia-cudnn-cu12>=9,<10
+      - nvidia-cublas-cu12
+      - nvidia-cufft-cu12
+      - nvidia-curand-cu12
+      - nvidia-cuda-nvrtc-cu12
